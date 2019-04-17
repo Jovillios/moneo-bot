@@ -1,5 +1,4 @@
 const botconfig = require("./botconfig.json")
-const tokenfile = require("./tokenfile.json")
 const Discord = require("discord.js");
 const fs = require("fs")
 const bot = new Discord.Client();
@@ -79,4 +78,4 @@ function addCoin(member, amount, reason) {
 	});
 }
 
-bot.login(tokenfile.token);
+bot.login(process.env.BOT_TOKEN);
