@@ -1,6 +1,6 @@
 const Discord = require("discord.js");
 
-let coin = require("../coin.js");
+let coin = require("../coin.json");
 
 module.exports.run = async(bot, message, args) => {
 	if(!message.member.hasPermission("ADMINISTRATOR")) return message.channel.send("Nope").then(msg => {msg.delete(5000)});
