@@ -37,7 +37,7 @@ function addCoin(bot, member, amount, reason) {
 
 	member.guild.channels.find("name", "neo").send(addCoinEmbed);
 
-	fs.writeFile("./coin.json", JSON.stringify(coin), (err) => {
+	fs.writeFile("../coin.json", JSON.stringify(coin), (err) => {
 		if(err) console.log(err);
 	});
 }
