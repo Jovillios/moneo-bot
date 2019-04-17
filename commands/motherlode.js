@@ -1,22 +1,21 @@
 const Discord = require("discord.js");
+const botconfig = require("../botconfig.json");
+const fs = require("fs");
 
 let coin = require("../coin.json");
 
 module.exports.run = async(bot, message, args) => {
 	if(!message.member.hasPermission("ADMINISTRATOR")) return message.channel.send("Nope").then(msg => {msg.delete(5000)});
-	if(!args[1]) return message.channel.send("Erreur : $motherlode <membre> <montant> <raison>").then(msg => {msg.delete(5000)});
 
-	let mem = message.guild.member(message.mentions.users.first()) || message.guild.member.get(args[0]);
-	let amount = parseInt(args[1]);
-	let reason = args[2];
-	addCoin(mem, amount, reason);
+	let mem = message.guild.member(message.mentions.users.first()) || message.guild.members.get(args[0]);
+	addCoin(bot, mem, args[1], args[2]);
 }
 
 module.exports.help = {
 	name: "motherlode"
 }
 
-function addCoin(member, amount, reason) {
+function addCoin(bot, member, amount, reason) {
 	if(!coin[member.id]) {
 		coin[member.id] = {
 			neo: 0
@@ -30,6 +29,7 @@ function addCoin(member, amount, reason) {
 	let addCoinEmbed = new Discord.RichEmbed()
 	.setTitle("Crédit")
 	.setColor("#ffbf00")
+	.addField("Client", member.user.username)
 	.addField("Montant crédité", `${parseInt(amount)} neo`)
 	.addField("Raison", reason)
 	.addField("Nouveau solde", `${newUserCoin} neo`)
