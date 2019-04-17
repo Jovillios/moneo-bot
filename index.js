@@ -1,6 +1,7 @@
-const botconfig = require("./botconfig.json");
+const botconfig = require("./botconfig.json")
+const tokenfile = require("./tokenfile.json")
 const Discord = require("discord.js");
-const fs = require("fs");
+const fs = require("fs")
 const bot = new Discord.Client();
 bot.commands = new Discord.Collection();
 
@@ -65,6 +66,7 @@ function addCoin(member, amount, reason) {
 	let addCoinEmbed = new Discord.RichEmbed()
 	.setTitle("Crédit")
 	.setColor("#ffbf00")
+	.addField("Client", member.user.username)
 	.addField("Montant crédité", `${parseInt(amount)} neo`)
 	.addField("Raison", reason)
 	.addField("Nouveau solde", `${newUserCoin} neo`)
@@ -77,4 +79,4 @@ function addCoin(member, amount, reason) {
 	});
 }
 
-bot.login(process.env.BOT_TOKEN);
+bot.login(tokenfile.token);
